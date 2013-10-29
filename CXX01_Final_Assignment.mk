@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Chinwei
-Date                   :=14-10-2013
+Date                   :=29-10-2013
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/LinkedList$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/LinkedList$(ObjectSuffix) $(IntermediateDirectory)/memory$(ObjectSuffix) 
 
 
 
@@ -104,6 +104,14 @@ $(IntermediateDirectory)/LinkedList$(DependSuffix): LinkedList.c
 $(IntermediateDirectory)/LinkedList$(PreprocessSuffix): LinkedList.c
 	@$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/LinkedList$(PreprocessSuffix) "LinkedList.c"
 
+$(IntermediateDirectory)/memory$(ObjectSuffix): memory.c $(IntermediateDirectory)/memory$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Dropbox/CXX01_Final_Assignment/memory.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/memory$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/memory$(DependSuffix): memory.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/memory$(ObjectSuffix) -MF$(IntermediateDirectory)/memory$(DependSuffix) -MM "memory.c"
+
+$(IntermediateDirectory)/memory$(PreprocessSuffix): memory.c
+	@$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/memory$(PreprocessSuffix) "memory.c"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -116,6 +124,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/LinkedList$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/LinkedList$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/LinkedList$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/memory$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/memory$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/memory$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) ".build-debug/CXX01_Final_Assignment"

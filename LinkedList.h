@@ -1,15 +1,27 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
 
 struct ListNode
 {
 	unsigned char * memPtr;
 	int sizeOfNodeInBytes;
-	struct ListNode *nextListPtr;
+	struct ListNode * nextListPtr;
 };
 
-typedef struct ListNode ListNode;
-typedef ListNode *ListNodePtr;
+
+
+typedef struct ListNode node;
+
+//Linked lists
+node * pfreeList;
+node * pUsedList;
+//typedef ListNode *ListNodePtr;
 int * startMemPtr;
 int * endMemPtr;
 
-void initLinkedList(ListNodePtr *list, unsigned char * memory);
-void allocateMemory(ListNodePtr *FreeList, ListNodePtr *UsedList,unsigned char * memory);
+
+
+void initLinkedList(unsigned char * memory);
+unsigned char * allocateMemory(int requestedBytes);
+void printLinkedLists();
