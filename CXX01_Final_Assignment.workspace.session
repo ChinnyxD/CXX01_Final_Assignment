@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Session Name="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\CXX01_Final_Assignment.workspace">
+<<<<<<< HEAD
   <int Value="3" Name="m_selectedTab"/>
+=======
+  <int Value="1" Name="m_selectedTab"/>
+>>>>>>> 4d4bfe17b64e24802832ab20b0038ac54546bc32
   <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\CXX01_Final_Assignment.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\main.c" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
+<<<<<<< HEAD
       <int Value="0" Name="CurrentLine"/>
+=======
+      <int Value="25" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.c" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="17" Name="CurrentLine"/>
+>>>>>>> 4d4bfe17b64e24802832ab20b0038ac54546bc32
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
     <TabInfo>
@@ -22,6 +36,7 @@
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
     <TabInfo>
+<<<<<<< HEAD
       <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.c" Name="FileName"/>
       <int Value="58" Name="FirstVisibleLine"/>
       <int Value="63" Name="CurrentLine"/>
@@ -31,10 +46,47 @@
       <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
       <int Value="17" Name="CurrentLine"/>
+=======
+      <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.h" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="12" Name="CurrentLine"/>
+>>>>>>> 4d4bfe17b64e24802832ab20b0038ac54546bc32
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
   </TabInfoArray>
   <SerializedObject Name="m_breakpoints">
-    <long Value="0" Name="Count"/>
+    <long Value="2" Name="Count"/>
+    <SerializedObject Name="Breakpoint0">
+      <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.c" Name="file"/>
+      <int Value="55" Name="lineno"/>
+      <wxString Value="" Name="function_name"/>
+      <wxString Value="" Name="memory_address"/>
+      <int Value="1" Name="bp_type"/>
+      <int Value="0" Name="watchpoint_type"/>
+      <wxString Value="" Name="watchpt_data"/>
+      <CData Name="commandlist"/>
+      <bool Value="0" Name="regex"/>
+      <bool Value="0" Name="is_temp"/>
+      <bool Value="1" Name="is_enabled"/>
+      <int Value="0" Name="ignore_number"/>
+      <wxString Value="" Name="conditions"/>
+      <int Value="0" Name="origin"/>
+    </SerializedObject>
+    <SerializedObject Name="Breakpoint1">
+      <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.c" Name="file"/>
+      <int Value="90" Name="lineno"/>
+      <wxString Value="" Name="function_name"/>
+      <wxString Value="" Name="memory_address"/>
+      <int Value="1" Name="bp_type"/>
+      <int Value="0" Name="watchpoint_type"/>
+      <wxString Value="" Name="watchpt_data"/>
+      <CData Name="commandlist"/>
+      <bool Value="0" Name="regex"/>
+      <bool Value="0" Name="is_temp"/>
+      <bool Value="1" Name="is_enabled"/>
+      <int Value="0" Name="ignore_number"/>
+      <wxString Value="" Name="conditions"/>
+      <int Value="0" Name="origin"/>
+    </SerializedObject>
   </SerializedObject>
 </Session>
