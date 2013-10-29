@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Session Name="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\CXX01_Final_Assignment.workspace">
-  <int Value="1" Name="m_selectedTab"/>
+  <int Value="3" Name="m_selectedTab"/>
   <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\CXX01_Final_Assignment.workspace" Name="m_workspaceName"/>
   <TabInfoArray Name="TabInfoArray">
     <TabInfo>
       <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\main.c" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
       <int Value="0" Name="CurrentLine"/>
-      <wxArrayString Name="Bookmarks"/>
-    </TabInfo>
-    <TabInfo>
-      <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.c" Name="FileName"/>
-      <int Value="81" Name="FirstVisibleLine"/>
-      <int Value="62" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
     <TabInfo>
@@ -25,6 +19,12 @@
       <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\memory.h" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
       <int Value="6" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="C:\Users\Chinwei\Dropbox\CXX01_Final_Assignment\LinkedList.c" Name="FileName"/>
+      <int Value="58" Name="FirstVisibleLine"/>
+      <int Value="63" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
     <TabInfo>
