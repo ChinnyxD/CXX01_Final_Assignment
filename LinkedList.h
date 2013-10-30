@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stddef.h>
 
+
 struct ListNode
 {
 	unsigned char * memPtr;

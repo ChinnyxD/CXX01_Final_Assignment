@@ -3,10 +3,10 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=CXX01_Final_Assignment
+ProjectName            :=CXX_TEST
 ConfigurationName      :=Debug
 WorkspacePath          := "C:\Users\Chinwei\Documents\GitHub\CXX01_Final_Assignment"
-ProjectPath            := "C:\Users\Chinwei\Documents\GitHub\CXX01_Final_Assignment"
+ProjectPath            := "C:\Users\Chinwei\Documents\GitHub\CXX01_Final_Assignment\CXX_TEST"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
@@ -32,7 +32,7 @@ Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
-ObjectsFileList        :="CXX01_Final_Assignment.txt"
+ObjectsFileList        :="CXX_TEST.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
 RcCmpOptions           := 
@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/LinkedList$(ObjectSuffix) $(IntermediateDirectory)/memory$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/memory$(ObjectSuffix) 
 
 
 
@@ -89,23 +89,15 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main$(ObjectSuffix): main.c $(IntermediateDirectory)/main$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Documents/GitHub/CXX01_Final_Assignment/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Documents/GitHub/CXX01_Final_Assignment/CXX_TEST/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main$(DependSuffix): main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main$(ObjectSuffix) -MF$(IntermediateDirectory)/main$(DependSuffix) -MM "main.c"
 
 $(IntermediateDirectory)/main$(PreprocessSuffix): main.c
 	@$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main$(PreprocessSuffix) "main.c"
 
-$(IntermediateDirectory)/LinkedList$(ObjectSuffix): LinkedList.c $(IntermediateDirectory)/LinkedList$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Documents/GitHub/CXX01_Final_Assignment/LinkedList.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/LinkedList$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/LinkedList$(DependSuffix): LinkedList.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/LinkedList$(ObjectSuffix) -MF$(IntermediateDirectory)/LinkedList$(DependSuffix) -MM "LinkedList.c"
-
-$(IntermediateDirectory)/LinkedList$(PreprocessSuffix): LinkedList.c
-	@$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/LinkedList$(PreprocessSuffix) "LinkedList.c"
-
 $(IntermediateDirectory)/memory$(ObjectSuffix): memory.c $(IntermediateDirectory)/memory$(DependSuffix)
-	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Documents/GitHub/CXX01_Final_Assignment/memory.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/memory$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Documents/GitHub/CXX01_Final_Assignment/CXX_TEST/memory.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/memory$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/memory$(DependSuffix): memory.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/memory$(ObjectSuffix) -MF$(IntermediateDirectory)/memory$(DependSuffix) -MM "memory.c"
 
@@ -121,14 +113,11 @@ clean:
 	$(RM) $(IntermediateDirectory)/main$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/main$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/main$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/LinkedList$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/LinkedList$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/LinkedList$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/memory$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/memory$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/memory$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
-	$(RM) ".build-debug/CXX01_Final_Assignment"
+	$(RM) "../.build-debug/CXX_TEST"
 
 
