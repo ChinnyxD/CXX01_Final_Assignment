@@ -1,17 +1,12 @@
-#include <stdio.h>
+
 #include <stddef.h>
 #include "memory.h"
-
-
-static unsigned char ram[16*1024];
-
-char *pMem_Start;
-int *allocated_Mem;
+#include <stdio.h>
+#include <string.h>
 
 int main()
 {
 	initMem();
-	allocMem(0);
 
 
 	
@@ -28,5 +23,19 @@ int main()
 	printf("memptr: %d\n",testnode.memPtr);
 	printf("Size: %d\n",testnode.sizeOfNodeInBytes);
 	printf("nextptr: %d\n",testnode.nextListPtr);*/
-	system("pause");
+	
+	char input[10];
+	while(strcmp("exit",input))
+	{
+		if(strcmp("alloc",input) == 0)
+		{
+			allocMem(8);
+		}
+		else if(strcmp("print",input) == 0)
+		{
+			printMemory();
+		}
+		printf("Type alloc,free or exit: ");//gets(input);
+		gets(input);
+	}
 }
