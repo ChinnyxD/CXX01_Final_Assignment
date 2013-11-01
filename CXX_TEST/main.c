@@ -29,13 +29,20 @@ int main()
 	{
 		if(strcmp("alloc",input) == 0)
 		{
-			allocMem(8);
+			printf("Type how many Bytes you want to allocate: ");
+			gets(input);
+			
+			allocMem(atoi(input));
+		}
+		else if(strcmp("free",input) == 0)
+		{
+			freeMemory();
 		}
 		else if(strcmp("print",input) == 0)
 		{
 			printMemory();
 		}
-		printf("Type alloc,free or exit: ");//gets(input);
+		printf("Type alloc,free,print or exit: ");
 		gets(input);
 	}
 }

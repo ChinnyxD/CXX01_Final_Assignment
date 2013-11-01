@@ -38,7 +38,7 @@ void * allocMem(int bytes)
 	//Search for the smallest block as long there is a next node
 	while(pFreeNode)
 	{
-		if(smallestBlock > pFreeNode->sizeOfNodeInBytes && pFreeNode->sizeOfNodeInBytes >= bytes)
+		if(smallestBlock > pFreeNode->sizeOfNodeInBytes && pFreeNode->sizeOfNodeInBytes >= bytes && bytes < 16384)
 		{
 			printf("Found smaller block @ %d\n",pFreeNode);
 			smallestBlock = pFreeNode->sizeOfNodeInBytes;
@@ -87,6 +87,191 @@ void * allocMem(int bytes)
 	return (unsigned char*)pNewUsedNode+8;
 }
 
+void freeMemory()
+{
+	node *pUsedNode = (node*) pUsedList;
+	int index = 0;
+	while(pUsedNode)
+	{
+		printf("index:%d, block:%d, block size:%d\n",index++,pUsedNode,pUsedNode->sizeOfNodeInBytes);
+		pUsedNode = pUsedNode->nextListPtr;
+	}
+	if(index==0)
+	{
+		printf("No blocks available to free!\n");
+		return;
+	}
+	else
+	{
+		int i;
+		char input[10];	
+		printf("Type the index number of the block you want to delete: ");
+		gets(input);
+		int selectedNode = atoi(input);
+		if(selectedNode >= index || selectedNode < 0)
+		{
+			printf("Not a valid index! returning to menu..\n");
+			return;
+		}
+		node *pPrevUsedNode = NULL;
+		//get selected node
+		pUsedNode = (node*) pUsedList;
+		for(i=0;i<selectedNode;i++)
+		{
+			pPrevUsedNode = (unsigned char*)pUsedNode;
+			pUsedNode = (unsigned char*)pUsedNode->nextListPtr;
+		}
+		
+		//deletion of node  //TODO
+		if(pUsedList == (unsigned char*)pUsedNode) 	//If the node is at the beginning of the list
+		{
+			printf("Deleting head node!\n");
+			if(pUsedNode->nextListPtr) // If this node has a next node, the head of the list will modified to the next node
+			{
+				pUsedList = (unsigned char*)pUsedNode->nextListPtr;
+			}
+			else
+			{
+				pUsedList = NULL;
+			}
+		}
+		else if(pPrevUsedNode && pUsedNode && pUsedNode->nextListPtr)
+		{
+			printf("Deleting mid node!\n");
+			pPrevUsedNode->nextListPtr = pUsedNode->nextListPtr;
+		}
+		else if(pPrevUsedNode && pUsedNode && pUsedNode->nextListPtr == NULL)
+		{
+			printf("Deleting end node\n");
+			pPrevUsedNode->nextListPtr = NULL;
+		}
+		
+		//add to free linked list
+		node *pFreeNode = (node*)pFreeList;
+		while(pFreeNode->nextListPtr)
+		{
+			pFreeNode=pFreeNode->nextListPtr;
+		}
+		pUsedNode->nextListPtr=NULL;
+		pFreeNode->nextListPtr=pUsedNode;
+		
+		//Check for merge
+		pFreeNode = (node*)pFreeList;
+		while(pFreeNode)
+		{
+			node *pCheckFreeNode = (node*)((unsigned char*)pFreeNode+sizeof(node)+pFreeNode->sizeOfNodeInBytes);
+			node *pFreeCheckingNode = (node*)pFreeList;
+			while(pFreeCheckingNode)
+			{//TODO
+				if(pCheckFreeNode == pFreeCheckingNode) //MERGE
+				{
+					printf("Found 2 Free blocks to merge!\n");
+					pFreeNode->sizeOfNodeInBytes = pFreeNode->sizeOfNodeInBytes+sizeof(node)+pFreeCheckingNode->sizeOfNodeInBytes;
+					pFreeNode->nextListPtr=pCheckFreeNode->nextListPtr;
+					//pFreeCheckingNode=pFreeCheckingNode->nextListPtr;
+					//pFreeCheckingNode=NULL;
+					//break;
+				}
+				//if(pFreeCheckingNode!=NULL)
+				pFreeCheckingNode=pFreeCheckingNode->nextListPtr;
+			}
+			pFreeNode=pFreeNode->nextListPtr;
+		}
+		
+		
+		/*node *pFreeNode = (node*)pFreeList;
+		node *pPrevFreeNode;
+		node *pCheckForNode = (node*)((unsigned char*)pUsedNode+sizeof(node)+pUsedNode->sizeOfNodeInBytes);
+		while(pFreeNode)
+		{
+			if(pFreeNode->nextListPtr)
+			{
+				node *pCheckForNode
+			}
+			
+			/*
+			if(pFreeNode == pCheckForNode) //Create new node with merge of next free node
+			{
+				printf("Found to merge with next block, Creating new node\n");
+				pPrevFreeNode->nextListPtr = pUsedNode;
+				pUsedNode->sizeOfNodeInBytes = pUsedNode->sizeOfNodeInBytes+sizeof(node)+pFreeNode->sizeOfNodeInBytes;
+				pUsedNode->nextListPtr = pFreeNode->nextListPtr;
+			}
+
+			pPrevFreeNode = pFreeNode;
+			pFreeNode = pFreeNode->nextListPtr;
+		}
+		
+		
+		
+		/*node *pCheckForNode = (node*)((unsigned char*)pUsedNode+sizeof(node)+pUsedNode->sizeOfNodeInBytes);
+		node *pFreeNode = (node*)pFreeList;
+		
+		int head = NULL;
+		while(pFreeNode)
+		{
+			if(pFreeNode == pCheckForNode)
+			{
+				printf("Found 2 Free Blocks to merge!");
+				pUsedNode->sizeOfNodeInBytes = pUsedNode->sizeOfNodeInBytes+sizeof(node)+pFreeNode->sizeOfNodeInBytes;
+				if(pFreeNode == (node*)pFreeList)// if the node is the same as the head
+				{
+					pUsedNode->nextListPtr = pCheckForNode->nextListPtr;
+					pFreeList = (unsigned char*) pUsedNode;
+				}
+				else
+				{
+					//go to the end of the linked list
+					node *pPrevUsedList;
+					while(pFreeNode->nextListPtr)
+					{
+						pFreeNode->nextListPtr;
+					}
+					//Append this node as a free Node
+					pUsedNode->nextListPtr = NULL;
+					pFreeNode->nextListPtr = pUsedNode;
+				}
+				
+				pCheckForNode=NULL;
+				printf("...Merged!\n");
+			}
+			pFreeNode = pFreeNode->nextListPtr;
+		}
+		
+		/*else 
+		{
+			//Search for a another free block to merge
+			while(pFreeNode)
+			{
+				if(pFreeNode == pCheckForNode)
+				{
+					printf("Found 2 Free Blocks to merge!");
+				}
+				pFreeNode = pFreeNode->nextListPtr;
+			}
+			if(pFreeList) // if there already are free blocks nodes in linked list
+			{
+				node *pFreeNode = (node*)pFreeList;
+				while(pFreeNode->nextListPtr)
+			}
+			else //if there are no nodes in free linked list
+			{
+				pFreeList = (unsigned char*)pUsedNode
+			}
+			
+			
+			/*node *pPrevFreeNode;
+			while(pFreeNode)
+			{
+				
+				
+				pPrevFreeNode = (node*)pFreeNode;
+				pFreeNode = pFreeNode->nextListPtr;
+			}*/
+		//}
+	}
+}
+
 void printMemory()
 {
 	printf("==========Printing free blocks==========\n");
@@ -94,10 +279,10 @@ void printMemory()
 	while(pFreeNode)
 	{
 		printf("----------Free Block----------\n");
-		printf("Free block Linked list address: %d\n",pFreeNode);
-		printf("Free block data storage address: %d\n",(unsigned char*)pFreeNode+sizeof(node));
-		printf("Free block size:%d\n",pFreeNode->sizeOfNodeInBytes);
-		printf("Free block nextPtr:%d\n",pFreeNode->nextListPtr);
+		printf("Linked list address: %d\n",pFreeNode);
+		printf("data storage address: %d\n",(unsigned char*)pFreeNode+sizeof(node));
+		printf("size:%d\n",pFreeNode->sizeOfNodeInBytes);
+		printf("nextPtr:%d\n",pFreeNode->nextListPtr);
 		pFreeNode = pFreeNode->nextListPtr;
 	}
 		printf("==========Printing used blocks==========\n");
@@ -105,10 +290,10 @@ void printMemory()
 	while(pUsedNode)
 	{
 		printf("----------Used Block----------\n");
-		printf("Used block Linked list address: %d\n",pUsedNode);
-		printf("Used block data storage address:%d\n",(unsigned char*)pUsedNode+sizeof(node));
-		printf("Used block size:%d\n",pUsedNode->sizeOfNodeInBytes);
-		printf("Used block nextPtr:%d\n",pUsedNode->nextListPtr);
+		printf("Linked list address: %d\n",pUsedNode);
+		printf("data storage address:%d\n",(unsigned char*)pUsedNode+sizeof(node));
+		printf("size:%d\n",pUsedNode->sizeOfNodeInBytes);
+		printf("nextPtr:%d\n",pUsedNode->nextListPtr);
 		pUsedNode = pUsedNode->nextListPtr;
 	}
 	printf("==========END PRINT==========\n");

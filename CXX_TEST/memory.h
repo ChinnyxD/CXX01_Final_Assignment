@@ -7,4 +7,5 @@ unsigned char *pUsedList;
 
 void initMem();
 void * allocMem(int bytes);
+void freeMemory();
 void printMemory();
