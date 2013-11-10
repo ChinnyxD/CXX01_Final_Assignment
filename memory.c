@@ -31,60 +31,83 @@ void initMem()
 
 void * allocMem(int bytes)
 {
+	if(bytes < 1)
+	{
+		printf("Cannot allocate < 1!\n");
+		return;
+	}
+	
 	int smallestBlock = 16384;
 	node *pPrevNode = NULL;
 	node *pSmallestBlock = NULL;
+	node *pPrevSmallestBlock = NULL;
 	//placeholder to search for the smallest block
 	node *pFreeNode = (node*) pFreeList;
 	//Search for the smallest block as long there is a next node
 	while(pFreeNode)
 	{
-		if(smallestBlock > pFreeNode->sizeOfNodeInBytes && pFreeNode->sizeOfNodeInBytes >= bytes && bytes < 16384)
+		if(smallestBlock > pFreeNode->sizeOfNodeInBytes && pFreeNode->sizeOfNodeInBytes > bytes+9 && bytes < 16376)
 		{
 			printf("Found smaller block @ %d\n",pFreeNode);
 			smallestBlock = pFreeNode->sizeOfNodeInBytes;
+			pPrevSmallestBlock = pPrevNode; 
 			pSmallestBlock = pFreeNode;
 		}
+		if(pFreeNode->nextListPtr == NULL) // Check if there is nextPtr
+		{break;}
 		pPrevNode = pFreeNode;
 		pFreeNode = pFreeNode->nextListPtr;
 	}
+	if(pSmallestBlock == NULL) //TODO write to file
+	{
+		printf("No block found! Try other size!\n");
+		return;
+	}
 	
+	//delete the pointer from the prev node
+
 	printf("memptr: %d\n",(pSmallestBlock));
 	printf("Size: %d\n",pSmallestBlock->sizeOfNodeInBytes);
 	printf("nextptr: %p\n",pSmallestBlock->nextListPtr);
 	
-	//Create new free block and store it in new node
-	//node *freeNode = ((node*) &memory)+(2*sizeof(unsigned char*));
-	
-	node *pNewUsedNode = (node*)((unsigned char*) pSmallestBlock);
-	pNewUsedNode->sizeOfNodeInBytes=bytes;
-	pNewUsedNode->nextListPtr = pUsedList;
-	pUsedList = (unsigned char*) pNewUsedNode;
-	
 	node *pNewFreeNode = (node*)((unsigned char*) (pSmallestBlock)+sizeof(node)+bytes);
-	pNewFreeNode->sizeOfNodeInBytes=smallestBlock-bytes-sizeof(node);
+	node *pNewUsedNode = (node*)((unsigned char*) pSmallestBlock);
+	
 	if(pFreeList == (unsigned char*)pSmallestBlock) //If the block is the beginning of the linked list
 	{
 		printf("New free node will be set in the beginning of the list!\n");
 
 		pNewFreeNode->nextListPtr = NULL;
 		pFreeList = (unsigned char*)pNewFreeNode;
-		
-
 	}
-	else if(pSmallestBlock && pSmallestBlock->nextListPtr && pPrevNode) // if the block is the mid of the linked list
+	else if(pSmallestBlock && pSmallestBlock->nextListPtr != NULL && pPrevNode) // if the block is the mid of the linked list
 	{
 		printf("New free node will be set with prev and next nodes!\n");
-		//the prev node will point to this node
-		pPrevNode->nextListPtr=pNewFreeNode;
+		pPrevSmallestBlock->nextListPtr=pNewFreeNode;
 		pNewFreeNode->nextListPtr = pSmallestBlock->nextListPtr;
-		//pFreeList = pNewFreeNode;
+		//pNewFreeNode->nextListPtr = NULL;
+		//pFreeNode->nextListPtr = pNewFreeNode;
 	}
 	else //If the block is at the end of the list
 	{
 		printf("New free node will be set with prev node!\n");
+
+		pPrevNode->nextListPtr = pNewFreeNode;
+		printf("prev:%d, new next:%d\n",pPrevNode,pPrevNode->nextListPtr);
 		pNewFreeNode->nextListPtr = NULL;
 	}
+	
+	
+	//Create new free block and store it in new node
+
+	pNewFreeNode->sizeOfNodeInBytes=smallestBlock-bytes-sizeof(node)-sizeof(node);
+	
+	//Create new used block and store in linked list
+	pNewUsedNode->sizeOfNodeInBytes=bytes;
+	pNewUsedNode->nextListPtr = pUsedList;
+	pUsedList = (unsigned char*) pNewUsedNode;
+	
+
 	return (unsigned char*)pNewUsedNode+8;
 }
 
@@ -155,6 +178,7 @@ void freeMemory()
 		}
 		pUsedNode->nextListPtr=NULL;
 		pFreeNode->nextListPtr=pUsedNode;
+		pUsedNode->nextListPtr=NULL;
 		
 		//Check for merge
 		pFreeNode = (node*)pFreeList;

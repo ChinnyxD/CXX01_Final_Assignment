@@ -8,28 +8,29 @@ int main()
 {
 	initMem();
 
-
-	
-	
-//	printf("block Size:%d\n",sizeof(pFreeList));
-	//store node in array
-	/*node* firstnode = (node*)&RAM[8];
-	firstnode->memPtr=&ram[4];
-	firstnode->sizeOfNodeInBytes=8;
-	firstnode->nextListPtr=NULL;*/
-	
-	//testing reading node
-	/*node testnode = *(node*)&RAM[0];
-	printf("memptr: %d\n",testnode.memPtr);
-	printf("Size: %d\n",testnode.sizeOfNodeInBytes);
-	printf("nextptr: %d\n",testnode.nextListPtr);*/
 	
 	char input[10];
+	
+	allocMem(1);
+	allocMem(2);
+	allocMem(4);
+	allocMem(8);
+	allocMem(16);
+	allocMem(32);
+	allocMem(64);
+	allocMem(128);
+	allocMem(256);
+	allocMem(512);
+	allocMem(1024);
+	allocMem(2048);
+	allocMem(4096);
+
+					
 	while(strcmp("exit",input))
 	{
 		if(strcmp("alloc",input) == 0)
 		{
-			printf("Type how many Bytes you want to allocate: ");
+			printf("How many Bytes do you want to allocate: ");
 			gets(input);
 			
 			allocMem(atoi(input));

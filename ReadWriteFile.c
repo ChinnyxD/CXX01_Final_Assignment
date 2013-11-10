@@ -3,24 +3,28 @@
 
 void saveToFile(unsigned char *memory)
 {
+	//array to save pathname
 	char pathName[100];
-	unsigned char *memoryPos;
 	printf("Specify a filename or path+filename: ");
 	gets(pathName);
 	
+	//open file with the specified filename
 	strcat(pathName,".db");
 	fp = fopen(pathName, "w");
-	memoryPos = memory;
-	unsigned char byte = (unsigned char)((unsigned char*)memoryPos);
-	int i = 0;
+	
+	//save characters
+	unsigned char *memoryPos = memory;
+	int i;
 	for(i=0;i<16384;i++)
 	{
-		printf("Address: %d",memoryPos);
-		fputc(byte,fp);
+		/*printf("%c",*(unsigned char*)memoryPos);
+		if(i==10)
+		{system("pause");}*/
+		fputc(*(unsigned char*)memoryPos,fp);
 
 		memoryPos=(unsigned char*)memoryPos++;
-		unsigned char byte = (unsigned char)memoryPos;
 	}
+	//Close file,end
 	fclose(fp);
 	
 }
