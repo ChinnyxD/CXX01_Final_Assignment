@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Chinwei
-Date                   :=31-10-2013
+Date                   :=1-11-2013
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/memory$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/memory$(ObjectSuffix) $(IntermediateDirectory)/ReadWriteFile$(ObjectSuffix) 
 
 
 
@@ -104,6 +104,14 @@ $(IntermediateDirectory)/memory$(DependSuffix): memory.c
 $(IntermediateDirectory)/memory$(PreprocessSuffix): memory.c
 	@$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/memory$(PreprocessSuffix) "memory.c"
 
+$(IntermediateDirectory)/ReadWriteFile$(ObjectSuffix): ReadWriteFile.c $(IntermediateDirectory)/ReadWriteFile$(DependSuffix)
+	$(CC) $(SourceSwitch) "C:/Users/Chinwei/Documents/GitHub/CXX01_Final_Assignment/CXX_TEST/ReadWriteFile.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ReadWriteFile$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ReadWriteFile$(DependSuffix): ReadWriteFile.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ReadWriteFile$(ObjectSuffix) -MF$(IntermediateDirectory)/ReadWriteFile$(DependSuffix) -MM "ReadWriteFile.c"
+
+$(IntermediateDirectory)/ReadWriteFile$(PreprocessSuffix): ReadWriteFile.c
+	@$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ReadWriteFile$(PreprocessSuffix) "ReadWriteFile.c"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -116,6 +124,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/memory$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/memory$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/memory$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/ReadWriteFile$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/ReadWriteFile$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/ReadWriteFile$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "../.build-debug/CXX_TEST"

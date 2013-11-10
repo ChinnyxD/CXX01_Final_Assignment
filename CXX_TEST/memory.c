@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
+#include "ReadWriteFile.h";
 
 struct ListNode
 {
@@ -270,6 +271,11 @@ void freeMemory()
 			}*/
 		//}
 	}
+}
+
+void saveToFileDB()
+{
+	saveToFile(&memory);
 }
 
 void printMemory()

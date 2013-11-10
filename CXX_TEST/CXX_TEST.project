@@ -93,5 +93,7 @@
     <File Name="main.c"/>
     <File Name="memory.c"/>
     <File Name="memory.h"/>
+    <File Name="ReadWriteFile.c"/>
+    <File Name="ReadWriteFile.h"/>
   </VirtualDirectory>
 </CodeLite_Project>

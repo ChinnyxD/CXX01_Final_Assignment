@@ -9,3 +9,4 @@ void initMem();
 void * allocMem(int bytes);
 void freeMemory();
 void printMemory();
+void saveToFileDB();

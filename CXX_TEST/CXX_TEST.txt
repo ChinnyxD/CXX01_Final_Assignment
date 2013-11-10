@@ -1,1 +1,1 @@
-./Debug/main.o ./Debug/memory.o   
+./Debug/main.o ./Debug/memory.o ./Debug/ReadWriteFile.o

@@ -42,6 +42,14 @@ int main()
 		{
 			printMemory();
 		}
+		else if(strcmp("save",input) == 0)
+		{
+			saveToFileDB();
+		}
+		else if(strcmp("load",input) == 0)
+		{
+		
+		}
 		printf("Type alloc,free,print or exit: ");
 		gets(input);
 	}
