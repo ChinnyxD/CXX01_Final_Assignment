@@ -1,25 +1,56 @@
-#include <stdio.h>
+
 #include <stddef.h>
 #include "memory.h"
-
-//static //16384
+#include <stdio.h>
+#include <string.h>
 
 int main()
 {
-	//allocate memory
-	unsigned char memory[1024*16]; 
+	initMem();
+
+
 	
-	//Initialize linked lists
 	
+//	printf("block Size:%d\n",sizeof(pFreeList));
+	//store node in array
+	/*node* firstnode = (node*)&RAM[8];
+	firstnode->memPtr=&ram[4];
+	firstnode->sizeOfNodeInBytes=8;
+	firstnode->nextListPtr=NULL;*/
 	
-	/*ListNodePtr freeListPtr = NULL;
-	ListNodePtr UsedListPtr = NULL;
-	printf("Start mem add: %d, End mem add:%d \n", &memory[0], &memory[16383]);
-	initLinkedList(&freeListPtr,&memory);*/
-	//void * RAM = malloc(16384);
+	//testing reading node
+	/*node testnode = *(node*)&RAM[0];
+	printf("memptr: %d\n",testnode.memPtr);
+	printf("Size: %d\n",testnode.sizeOfNodeInBytes);
+	printf("nextptr: %d\n",testnode.nextListPtr);*/
 	
-	initMemory(&memory);
-	printf("hello world\n");
-	system("pause");
-	return 0;
+	char input[10];
+	while(strcmp("exit",input))
+	{
+		if(strcmp("alloc",input) == 0)
+		{
+			printf("Type how many Bytes you want to allocate: ");
+			gets(input);
+			
+			allocMem(atoi(input));
+		}
+		else if(strcmp("free",input) == 0)
+		{
+			freeMemory();
+		}
+		else if(strcmp("print",input) == 0)
+		{
+			printMemory();
+		}
+		else if(strcmp("save",input) == 0)
+		{
+			saveToFileDB();
+		}
+		else if(strcmp("load",input) == 0)
+		{
+		
+		}
+		printf("Type alloc,free,print or exit: ");
+		gets(input);
+	}
 }

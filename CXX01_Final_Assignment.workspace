@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="CXX01_Final_Assignment" Database="./CXX01_Final_Assignment.tags">
-  <Project Name="CXX01_Final_Assignment" Path="CXX01_Final_Assignment.project" Active="No"/>
-  <Project Name="CXX_TEST" Path="CXX_TEST/CXX_TEST.project" Active="Yes"/>
+  <Project Name="CXX01_Final_Assignment" Path="CXX01_Final_Assignment.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="CXX01_Final_Assignment" ConfigName="Debug"/>
-      <Project Name="CXX_TEST" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="CXX01_Final_Assignment" ConfigName="Release"/>
-      <Project Name="CXX_TEST" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>

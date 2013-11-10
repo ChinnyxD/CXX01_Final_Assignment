@@ -91,9 +91,11 @@
   </Settings>
   <VirtualDirectory Name="src">
     <File Name="main.c"/>
-    <File Name="LinkedList.c"/>
-    <File Name="LinkedList.h"/>
     <File Name="memory.c"/>
     <File Name="memory.h"/>
+    <File Name="ReadWriteFile.c"/>
+    <File Name="ReadWriteFile.h"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>
