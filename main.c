@@ -2,67 +2,49 @@
 #include <stddef.h>
 #include "memory.h"
 #include <stdio.h>
+#include <stdlib.h> 
 #include <string.h>
 
+/*! \mainpage This is the documentation for the application created for the final assignment for CXX01
+ *
+ * //\section intro_sec Introduction
+ *	The main will initialize memory and then wait for user commands.
+ */
 int main()
 {
 	initMem();
 
-	
-	char input[10];
-	
-	allocMem(4);
-	allocMem(1);
-	allocMem(8);
-	allocMem(7);
-	allocMem(5);
-	
-	/*allocMem(1);
-	allocMem(2);
-	allocMem(4);
-	 * 
-	 * 
-	allocMem(8);
-	allocMem(16);
-	allocMem(32);
-	allocMem(64);
-	allocMem(128);
-	allocMem(256);
-	allocMem(512);
-	allocMem(1024);
-	allocMem(2048);
-	allocMem(4096);*/
-
+	char cInput[10];
 					
-	while(strcmp("exit",input))
+	while(strcmp("exit",cInput))
 	{
-		if(strcmp("alloc",input) == 0)
+		if(strcmp("alloc",cInput) == 0)
 		{
 			printf("> How many Bytes do you want to allocate: ");
-			gets(input);
+			gets(cInput);
 			
-			printf("Returned pointer: %d\n",allocMem(atoi(input)));
+			printf("Returned pointer: %p\n",allocMem(atoi(cInput)));
 		}
-		else if(strcmp("free",input) == 0)
+		else if(strcmp("free",cInput) == 0)
 		{
-			freeMemory();
+			freeMemory(NULL);
 		}
-		else if(strcmp("print",input) == 0)
+		else if(strcmp("print",cInput) == 0)
 		{
 			printMemory();
 		}
-		else if(strcmp("save",input) == 0)
+		else if(strcmp("save",cInput) == 0)
 		{
 			saveToFileDB();
 		}
-		else if(strcmp("sort",input) == 0)
+		else if(strcmp("sort",cInput) == 0)
 		{
 			printf("> Choose sort method(1: By Address, 2: By size):");
-			gets(input);
+			gets(cInput);
 			
-			if(atoi(input) > 0 && atoi(input) < 3)
+			if(atoi(cInput) > 0 && atoi(cInput) < 3)
 			{
-				sortAllLinkedList(atoi(input));
+				sortAllLinkedList(atoi(cInput));
 			}
 			else
 			{
@@ -70,6 +52,7 @@ int main()
 			}
 		}
 		printf("> Type alloc, free, print, save, load or exit: ");
-		gets(input);
+		gets(cInput);
 	}
+	return 0;
 }

@@ -1,7 +1,13 @@
 #include <stdio.h>
 
+/**
+ * Saves the allocated memory to a .db file. The user is able to define a filename. The allocated memory will not be deleted!
+ * @param *memory The pointer of memory
+ */ 
+void saveMemoryToFile(unsigned char *pucMemory);
 
-FILE *fp;
-
-void saveMemoryToFile(unsigned char *memory);
-void saveToDB(unsigned char* memory);
+/**
+ * Saves the allocated memory to a .db file. The allocated memory will be deleted!
+ * @param *memory The pointer of memory 
+ */
+void saveToDB(unsigned char *pucMemory);
