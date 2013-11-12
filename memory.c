@@ -4,9 +4,9 @@
 #include <string.h>
 #include "ReadWriteFile.h";
 
+//this struct is 8 bytes 
 struct ListNode
 {
-	//unsigned char * memPtr;
 	int sizeOfNodeInBytes;
 	struct ListNode * nextListPtr;
 };
@@ -26,6 +26,7 @@ void initMem()
 	freeNode->sizeOfNodeInBytes=((16384)-(((2*sizeof(unsigned char*))+sizeof(node))));//(16*1024)-sizeof(freeNode);
 	freeNode->nextListPtr=NULL;
 	pFreeList = (unsigned char*)freeNode;
+	printf("Array address: %d\n",&memory);
 	printf("Block start:%d\n", pFreeList);
 }
 
@@ -46,7 +47,7 @@ void * allocMem(int bytes)
 	//Search for the smallest block as long there is a next node
 	while(pFreeNode)
 	{
-		if(smallestBlock > pFreeNode->sizeOfNodeInBytes && pFreeNode->sizeOfNodeInBytes > bytes+9 && bytes < 16376)
+		if(smallestBlock > pFreeNode->sizeOfNodeInBytes && pFreeNode->sizeOfNodeInBytes > bytes && bytes < 16376)
 		{
 			printf("Found smaller block @ %d\n",pFreeNode);
 			smallestBlock = pFreeNode->sizeOfNodeInBytes;
@@ -54,7 +55,9 @@ void * allocMem(int bytes)
 			pSmallestBlock = pFreeNode;
 		}
 		if(pFreeNode->nextListPtr == NULL) // Check if there is nextPtr
-		{break;}
+		{
+			break;
+		}
 		pPrevNode = pFreeNode;
 		pFreeNode = pFreeNode->nextListPtr;
 	}
@@ -66,13 +69,14 @@ void * allocMem(int bytes)
 	
 	//delete the pointer from the prev node
 
-	printf("memptr: %d\n",(pSmallestBlock));
-	printf("Size: %d\n",pSmallestBlock->sizeOfNodeInBytes);
-	printf("nextptr: %p\n",pSmallestBlock->nextListPtr);
+	//printf("memptr: %d\n",(pSmallestBlock));
+	//printf("Size: %d\n",pSmallestBlock->sizeOfNodeInBytes);
+	//printf("nextptr: %p\n",pSmallestBlock->nextListPtr);
 	
-	node *pNewFreeNode = (node*)((unsigned char*) (pSmallestBlock)+sizeof(node)+bytes);
+
 	node *pNewUsedNode = (node*)((unsigned char*) pSmallestBlock);
 	
+	node *pNewFreeNode = (node*)((unsigned char*) (pSmallestBlock)+sizeof(node)+bytes);
 	if(pFreeList == (unsigned char*)pSmallestBlock) //If the block is the beginning of the linked list
 	{
 		printf("New free node will be set in the beginning of the list!\n");
@@ -85,8 +89,6 @@ void * allocMem(int bytes)
 		printf("New free node will be set with prev and next nodes!\n");
 		pPrevSmallestBlock->nextListPtr=pNewFreeNode;
 		pNewFreeNode->nextListPtr = pSmallestBlock->nextListPtr;
-		//pNewFreeNode->nextListPtr = NULL;
-		//pFreeNode->nextListPtr = pNewFreeNode;
 	}
 	else //If the block is at the end of the list
 	{
@@ -106,7 +108,6 @@ void * allocMem(int bytes)
 	pNewUsedNode->sizeOfNodeInBytes=bytes;
 	pNewUsedNode->nextListPtr = pUsedList;
 	pUsedList = (unsigned char*) pNewUsedNode;
-	
 
 	return (unsigned char*)pNewUsedNode+8;
 }
@@ -129,7 +130,7 @@ void freeMemory()
 	{
 		int i;
 		char input[10];	
-		printf("Type the index number of the block you want to delete: ");
+		printf("> Type the index number of the block you want to delete: ");
 		gets(input);
 		int selectedNode = atoi(input);
 		if(selectedNode >= index || selectedNode < 0)
@@ -142,8 +143,8 @@ void freeMemory()
 		pUsedNode = (node*) pUsedList;
 		for(i=0;i<selectedNode;i++)
 		{
-			pPrevUsedNode = (unsigned char*)pUsedNode;
-			pUsedNode = (unsigned char*)pUsedNode->nextListPtr;
+			pPrevUsedNode = (node*)(unsigned char*)pUsedNode;
+			pUsedNode = (node*)(unsigned char*)pUsedNode->nextListPtr;
 		}
 		
 		//deletion of node  //TODO
@@ -176,7 +177,7 @@ void freeMemory()
 		{
 			pFreeNode=pFreeNode->nextListPtr;
 		}
-		pUsedNode->nextListPtr=NULL;
+		//pUsedNode->nextListPtr=NULL;
 		pFreeNode->nextListPtr=pUsedNode;
 		pUsedNode->nextListPtr=NULL;
 		
@@ -207,7 +208,75 @@ void freeMemory()
 
 void saveToFileDB()
 {
-	saveToFile(&memory);
+	saveMemoryToFile((unsigned char*)&memory);
+}
+//bubblesort
+void sortAllLinkedList(int sort)
+{
+	//Sort used nodes
+	int changedFlag;
+	do
+	{
+		changedFlag = 0;
+		node *pPrevNode = NULL;
+		node *pNode = (node*) pUsedList;
+		node *pNodeNext = (node*)(unsigned char*) pNode->nextListPtr;
+		while(pNode)
+		{
+			//apply algorithm if conditions are met for sorting
+			if(pNode != NULL && pNodeNext != NULL && ((pNode->sizeOfNodeInBytes > pNodeNext->sizeOfNodeInBytes && sort == 2) || (sort == 1 && pNodeNext < pNode)))
+			{
+				//Check if the Head of the linked list needs to be updated
+				if(pPrevNode == NULL)
+					pUsedList = (unsigned char*)pNodeNext;
+				else
+					pPrevNode->nextListPtr=pNodeNext;
+				pNode->nextListPtr=pNodeNext->nextListPtr;
+				pNodeNext->nextListPtr=pNode;
+				changedFlag = 1;
+			}
+			pPrevNode = pNode;
+			pNode = pNode->nextListPtr;
+			if(pNode != NULL)
+			pNodeNext=pNode->nextListPtr;
+		}		
+	}
+	while(changedFlag != 0);
+	
+	//sort free nodes
+	do
+	{
+		changedFlag = 0;
+		node *pPrevNode = NULL;
+		node *pNode = (node*) pFreeList;
+		node *pNodeNext = (node*)(unsigned char*) pNode->nextListPtr;
+		while(pNode)
+		{
+			//apply algorithm if conditions are met for sorting
+			if(pNode != NULL && pNodeNext != NULL && ((pNode->sizeOfNodeInBytes > pNodeNext->sizeOfNodeInBytes && sort == 2) || (sort == 1 && pNodeNext < pNode)))
+			{
+				//Check if the Head of the linked list needs to be updated
+				if(pPrevNode == NULL)
+					pFreeList = (unsigned char*)pNodeNext;
+				else
+					pPrevNode->nextListPtr=pNodeNext;
+				pNode->nextListPtr=pNodeNext->nextListPtr;
+				pNodeNext->nextListPtr=pNode;
+				changedFlag = 1;
+			}
+			pPrevNode = pNode;
+			pNode = pNode->nextListPtr;
+			if(pNode != NULL)
+			pNodeNext=pNode->nextListPtr;
+		}		
+	}
+	while(changedFlag != 0);
+
+}
+
+void loadToMem()
+{
+	readFile((unsigned char*)&memory);
 }
 
 void printMemory()

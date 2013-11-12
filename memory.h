@@ -9,3 +9,4 @@ void * allocMem(int bytes);
 void freeMemory();
 void printMemory();
 void saveToFileDB();
+void sortAllLinkedList(int sort);

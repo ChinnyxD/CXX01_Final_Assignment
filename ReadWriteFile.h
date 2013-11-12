@@ -1,4 +1,7 @@
 #include <stdio.h>
 
-void saveToFile(unsigned char *memory);
+
 FILE *fp;
+
+void readFile(unsigned char *memory);
+void saveMemoryToFile(unsigned char *memory);

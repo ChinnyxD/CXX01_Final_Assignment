@@ -1,7 +1,7 @@
 #include "ReadWriteFile.h"
 
 
-void saveToFile(unsigned char *memory)
+void saveMemoryToFile(unsigned char *memory)
 {
 	//array to save pathname
 	char pathName[100];
@@ -13,6 +13,7 @@ void saveToFile(unsigned char *memory)
 	fp = fopen(pathName, "w");
 	
 	//save characters
+	printf("%d\n",memory);
 	unsigned char *memoryPos = memory;
 	int i;
 	for(i=0;i<16384;i++)
@@ -26,5 +27,9 @@ void saveToFile(unsigned char *memory)
 	}
 	//Close file,end
 	fclose(fp);
-	
+}
+
+void readFile(unsigned char *memory)
+{
+	printf("%d\n",memory);
 }
