@@ -7,9 +7,11 @@
 
 /*! \mainpage This is the documentation for the application created for the final assignment for CXX01
  *
- * //\section intro_sec Introduction
- *	The main will initialize memory and then wait for user commands.
  */
+ 
+ /**
+  * The main will initialize memory and then wait for user commands. 
+  */
 int main()
 {
 	initMem();

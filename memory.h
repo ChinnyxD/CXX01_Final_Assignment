@@ -20,17 +20,17 @@ void initMem();
 
 /**
  * Allocates a block with a requested size in Bytes
- * @param bytes Requested size in Bytes
+ * @param iBytes Requested size in Bytes
  */
-void * allocMem(int bytes);
+void * allocMem(int iBytes);
 
 /**
  * Frees an allocated block.
  * 
  * The user can delete using command line commands or a pointer can be given to free.
- * @param pMemToDelete Pointer of node that should be deleted
+ * @param pucMemToDelete Pointer of node that should be deleted
  */
-void freeMemory(unsigned char* pMemToDelete);
+void freeMemory(unsigned char* pucMemToDelete);
 
 /**
  * Prints all Free nodes and used nodes
@@ -45,9 +45,9 @@ void saveToFileDB();
 /**
  * Sorts the linked list. The user is able to define to sort on addresses or on blocksize 
  * 
- * @param sort input of sort method
+ * @param iSort input of sort method
  */
-void sortAllLinkedList(int sort);
+void sortAllLinkedList(int iSort);
 
 /**
  * Check if Free blocks can be merged

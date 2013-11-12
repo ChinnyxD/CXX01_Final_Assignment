@@ -288,7 +288,7 @@ void saveToFileDB()
 }
 
 //bubblesort
-void sortAllLinkedList(int sort)
+void sortAllLinkedList(int iSort)
 {
 	//Sort used SNodes
 	int iChangedFlag;
@@ -309,7 +309,7 @@ void sortAllLinkedList(int sort)
 			while(pSNode)
 			{
 				//apply algorithm if conditions are met for sorting
-				if(pSNode != NULL && pSNodeNext != NULL && ((pSNode->iSizeOfNodeIniBytes > pSNodeNext->iSizeOfNodeIniBytes && sort == 2) || (sort == 1 && pSNodeNext > pSNode)))
+				if(pSNode != NULL && pSNodeNext != NULL && ((pSNode->iSizeOfNodeIniBytes > pSNodeNext->iSizeOfNodeIniBytes && iSort == 2) || (iSort == 1 && pSNodeNext > pSNode)))
 				{
 					//Check if the Head of the linked list needs to be updated
 					if(pSPrevNode == NULL)
@@ -338,7 +338,7 @@ void sortAllLinkedList(int sort)
 		while(pSNode)
 		{
 			//apply algorithm if conditions are met for sorting
-			if(pSNode != NULL && pSNodeNext != NULL && ((pSNode->iSizeOfNodeIniBytes > pSNodeNext->iSizeOfNodeIniBytes && sort == 2) || (sort == 1 && pSNodeNext < pSNode)))
+			if(pSNode != NULL && pSNodeNext != NULL && ((pSNode->iSizeOfNodeIniBytes > pSNodeNext->iSizeOfNodeIniBytes && iSort == 2) || (iSort == 1 && pSNodeNext < pSNode)))
 			{
 				//Check if the Head of the linked list needs to be updated
 				if(pSPrevNode == NULL)
