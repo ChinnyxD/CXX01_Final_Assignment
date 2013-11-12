@@ -3,5 +3,5 @@
 
 FILE *fp;
 
-void readFile(unsigned char *memory);
 void saveMemoryToFile(unsigned char *memory);
+void saveToDB(unsigned char* memory);

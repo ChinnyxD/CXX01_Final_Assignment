@@ -20,6 +20,8 @@ int main()
 	/*allocMem(1);
 	allocMem(2);
 	allocMem(4);
+	 * 
+	 * 
 	allocMem(8);
 	allocMem(16);
 	allocMem(32);
@@ -39,7 +41,7 @@ int main()
 			printf("> How many Bytes do you want to allocate: ");
 			gets(input);
 			
-			allocMem(atoi(input));
+			printf("Returned pointer: %d\n",allocMem(atoi(input)));
 		}
 		else if(strcmp("free",input) == 0)
 		{
@@ -52,10 +54,6 @@ int main()
 		else if(strcmp("save",input) == 0)
 		{
 			saveToFileDB();
-		}
-		else if(strcmp("load",input) == 0)
-		{
-			loadToMem();
 		}
 		else if(strcmp("sort",input) == 0)
 		{
