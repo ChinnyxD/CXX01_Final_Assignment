@@ -144,8 +144,9 @@ void * allocMem(int iBytes)
 	return (unsigned char*)pSNewUsedNode+sizeof(SNode);
 }
 
-void freeMemory(unsigned char* pucMemToDelete)
+void freeMemory(void *pvMemToDelete)
 {
+	unsigned char* pucMemToDelete = ((unsigned char*)(pvMemToDelete)-8);
 	SNode *pSUsedNode = (SNode*) pucUsedList;
 	SNode *pSPrevUsedNode = NULL;
 	int iIndex = 0;

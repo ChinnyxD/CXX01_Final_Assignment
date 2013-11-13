@@ -2,7 +2,7 @@ var memory_8h =
 [
     [ "allocMem", "memory_8h.html#a1eb5fb52ba86397d1ede3a7ccec42758", null ],
     [ "checkForMerge", "memory_8h.html#abc4a84f1715421c5be3b7e37eb7cc486", null ],
-    [ "freeMemory", "memory_8h.html#a1b67316e7be14958187ad44010165a33", null ],
+    [ "freeMemory", "memory_8h.html#a016c2628213e04f0b8dffcaa41bb13be", null ],
     [ "initMem", "memory_8h.html#aff30ba8ff23010889db3e9191f24e8e9", null ],
     [ "printMemory", "memory_8h.html#a9b866620c35b04692c513562f9e38650", null ],
     [ "saveToFileDB", "memory_8h.html#a65556d1f1bf68c3e890fa281814e6952", null ],

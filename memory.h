@@ -28,9 +28,9 @@ void * allocMem(int iBytes);
  * Frees an allocated block.
  * 
  * The user can delete using command line commands or a pointer can be given to free.
- * @param pucMemToDelete Pointer of node that should be deleted
+ * @param pvMemToDelete Pointer of node that should be deleted
  */
-void freeMemory(unsigned char* pucMemToDelete);
+void freeMemory(void* pvMemToDelete);
 
 /**
  * Prints all Free nodes and used nodes

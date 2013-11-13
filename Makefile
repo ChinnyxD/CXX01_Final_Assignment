@@ -1,8 +1,29 @@
-.PHONY: clean All
+HEADERS = memory.h ReadWriteFile.h
 
-All:
-	@echo "----------Building project:[ CXX01_Final_Assignment - Debug ]----------"
-	@$(MAKE) -f  "CXX01_Final_Assignment.mk"
+OBJECTS = main.o memory.o ReadWriteFile.o
+
+
+
+all: build
+
+
+
+
+%.o:%.c $(HEADERS)
+
+	gcc -c $< -o $@
+	
+
+
+
+
+build: $(OBJECTS)
+        
+	gcc $(OBJECTS) -o program
+
+
 clean:
-	@echo "----------Cleaning project:[ CXX01_Final_Assignment - Debug ]----------"
-	@$(MAKE) -f  "CXX01_Final_Assignment.mk" clean
+  
+	-rm -f $(OBJECTS)
+  
+	-rm -f program
