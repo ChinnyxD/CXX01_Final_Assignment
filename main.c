@@ -53,7 +53,7 @@ int main()
 				printf("Not a valid option!\n");
 			}
 		}
-		printf("> Type alloc, free, print, save, load or exit: ");
+		printf("> Type alloc, free, print, save, load , sort or exit: ");
 		gets(cInput);
 	}
 	return 0;
